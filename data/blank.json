@@ -1,0 +1,12 @@
+{
+    "config":
+    {},
+    "params": [
+    {
+        "$id": 1,
+        "id": 1,
+        "name": "mins_per_plant",
+        "min": 2,
+        "max": 5
+    }]
+}
