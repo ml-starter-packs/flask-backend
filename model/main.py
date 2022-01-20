@@ -45,7 +45,6 @@ def process_request() -> flask.Response:
             status=415,
             mimetype="text/plain",
         )
-
     return handle_request(data)
 
 
@@ -74,7 +73,6 @@ def handle_request(data: Dict) -> flask.Response:
         status = 200
         mt = "text/csv"
         return flask.Response(response=result_str, status=status, mimetype=mt)
-
     return flask.Response(
         response="Invalid request format. Try again?",
         status=404,
