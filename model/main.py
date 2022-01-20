@@ -2,7 +2,7 @@
 
 import ast
 import io
-from typing import Dict
+from typing import Dict, Tuple
 
 import flask
 
@@ -48,24 +48,15 @@ def process_request() -> flask.Response:
     return handle_request(data)
 
 
-def handle_request(data: Dict) -> flask.Response:
+def handle_request(payload: Dict) -> flask.Response:
     """
-    Handles the payload dictionary `data`
+    Handles the payload dictionary `payload` sent by the request.
     """
-    keys = data.keys()
+    keys = payload.keys()
     if "config" in keys and "params" in keys:
-        params = data["params"]
-        # support for missing names
-        names = [f"item {i}" for i in range(20, 0, -1)]
-        _config = data["config"]
-        # filter out blank column names, replace them with generic "item X"
-        _data = {}
-        for item in params:
-            key = item["name"] if item["name"] != "" else names.pop()
-            _data[key] = item
-
+        config, params = unpack_payload(payload)
         # DO SOMETHING WITH DATA HERE:
-        output_df = inference(_config, _data)
+        output_df = inference(config, params)
 
         out = io.StringIO()
         output_df.to_csv(out, header=True, index=False)
@@ -78,3 +69,17 @@ def handle_request(data: Dict) -> flask.Response:
         status=404,
         mimetype="text/plain",
     )
+
+
+def unpack_payload(payload: Dict) -> Tuple[Dict, Dict]:
+    config = payload["config"]
+    params = {}
+    missing_name_index = 0
+    for item in payload["params"]:
+        if item["name"]:
+            key = item["name"]
+        else:  # replace blank "name"fields with generic "item X"
+            missing_name_index += 1
+            key = f"item {missing_name_index}"
+        params[key] = item
+    return config, params
