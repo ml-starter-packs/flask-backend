@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import ast
 import io
 from typing import Dict
 
@@ -35,8 +36,6 @@ def process_request() -> flask.Response:
         )
     if flask.request.content_type == "text/json":
         data = flask.request.data.decode("utf-8")
-        import ast
-
         data = ast.literal_eval(data)
     elif flask.request.content_type == "application/json":
         data = flask.request.get_json(force=True)
