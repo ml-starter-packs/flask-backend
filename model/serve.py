@@ -65,11 +65,13 @@ def start_server():
     )
 
     # sets handler (second argument) for the signal SIGTERM (first argument).
-    # the handler should be a callable which takes two arguments (hence `a`, `b`),
+    # The handler should be a callable which takes two arguments (hence `a`, `b`),
     # and it is called with two arguments: the signal number and current stack frame.
-    # neither of these are relevant, so we define a dummy handler which kills the
-    # processes we have started (nginx and gunicorn)
-    handler = lambda a, b: sigterm_handler(nginx.pid, gunicorn.pid)
+    # Neither of these are relevant to us, so we define a dummy handler which kills
+    # the two processes we have started (nginx and gunicorn) regardless of `a`/`b`.
+    # Basically, we are hard-coding "kill these two processes if you get a SIGTERM"
+    def handler(a, b):
+        return sigterm_handler(nginx.pid, gunicorn.pid)
     signal.signal(signal.SIGTERM, handler)
 
     # If either subprocess exits, so do we.
