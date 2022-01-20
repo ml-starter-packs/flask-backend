@@ -9,6 +9,7 @@ from predictor import inference
 
 app = flask.Flask(__name__)
 
+
 @app.route("/ping", methods=["GET"])
 def ping() -> flask.Response:
     """Determine if the container is working and healthy."""

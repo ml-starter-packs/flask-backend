@@ -72,6 +72,7 @@ def start_server():
     # Basically, we are hard-coding "kill these two processes if you get a SIGTERM"
     def handler(a, b):
         return sigterm_handler(nginx.pid, gunicorn.pid)
+
     signal.signal(signal.SIGTERM, handler)
 
     # If either subprocess exits, so do we.

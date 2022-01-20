@@ -33,11 +33,7 @@ def filter_and_process_samples(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def payroll_analysis(
-    num_plants=100,
-    mins_per_plant=5,
-    dollars_per_hour=15,
-    hours_per_shift=8,
-    **kwds
+    num_plants=100, mins_per_plant=5, dollars_per_hour=15, hours_per_shift=8, **kwds
 ):
     hours_per_plant_per_day = mins_per_plant / 60.0
     total_hours_per_day = hours_per_plant_per_day * num_plants
