@@ -1,10 +1,10 @@
 all: serve
 
 build:
-	docker build -t test-api .
+	docker build -t flask-api .
 
 serve: build
-	docker run -ti -p 1337:1337 --rm -v $(shell pwd)/model/predictor.py:/opt/program/predictor.py test-api
+	docker run -ti -p 1337:1337 --rm --name test-api flask-api
 
 test.csv:
 	@echo "======================="
