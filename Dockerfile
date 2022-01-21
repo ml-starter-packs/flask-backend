@@ -33,4 +33,8 @@ RUN pip3 install -r /tmp/requirements.txt && \
 COPY model/ /opt/program
 
 EXPOSE 1337
+# add `safeuser` with id `8985`
+ARG UID=8985
+RUN useradd -u ${UID} safeuser
+USER safeuser
 CMD ./serve.py
