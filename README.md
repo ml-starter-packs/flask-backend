@@ -20,6 +20,8 @@ make test
 make blank
 ```
 
+Extra fun: upload the resulting `test.csv` to [hiplot](https://facebookresearch.github.io/hiplot/_static/hiplot_upload.html) to visualize the result of the calculation that was just performed.
+
 
 # Debugging / Developing
 This can be helpful for making edits while keeping `flask` running.
