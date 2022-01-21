@@ -1,4 +1,4 @@
-from typing import Dict, Optional
+from typing import Dict, Optional, Any
 
 import numpy as np
 import pandas as pd
@@ -77,11 +77,25 @@ def parse_input(
         num_samples = max(int(num_samples), int(1e3))
         num_samples = min(int(num_samples), int(1e6))
 
+    output_df = random_samples(data, num_samples)
+
+    if "dollars_per_hour" in output_df.columns:
+        output_df["dollars_per_hour"] = output_df["dollars_per_hour"].round(2)
+
+    integer_types = ["num_plants", "hours_per_shift"]
+    for col in set(integer_types) & set(output_df.columns):
+        output_df[col] = output_df[col].astype("int")
+
+    return output_df
+
+
+def random_samples(data: Dict[str, Any], num_samples=100):
     input_df = pd.DataFrame(data)
     print("Invoked parser. Inputs:")
     print(input_df)
     output_df = pd.DataFrame()
     column_names = set(input_df.columns) & TARGET_COLS
+
     for col in column_names:
         column = input_df[col]
         mn, mx = column.loc["min"], column.loc["max"]
@@ -101,14 +115,6 @@ def parse_input(
         a, b = DIST_DICT.get(dist_type, (1, 1))
         col_dist = dist.beta(a=a, b=b, loc=mn, scale=mx - mn)
         col_samples = col_dist.rvs(num_samples)
-        col_samples = np.round(col_samples, 2)
-        output_df[col] = col_samples
-
-    if "dollars_per_hour" in output_df.columns:
-        output_df["dollars_per_hour"] = output_df["dollars_per_hour"].round(2)
-
-    integer_types = ["num_plants", "hours_per_shift"]
-    for col in set(integer_types) & set(output_df.columns):
-        output_df[col] = output_df[col].astype("int")
-
+        rounded_col_samples = np.round(col_samples, 2)
+        output_df[col] = rounded_col_samples
     return output_df
