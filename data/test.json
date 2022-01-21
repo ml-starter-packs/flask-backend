@@ -7,7 +7,7 @@
     {
         "$id": 1,
         "id": 1,
-        "name": "num_plants",
+        "name": "num_docs",
         "min": 500,
         "max": 5000,
         "uq": "uniform"
@@ -15,7 +15,7 @@
     {
         "$id": 2,
         "id": 2,
-        "name": "mins_per_plant",
+        "name": "mins_per_doc",
         "min": 2,
         "max": 5,
         "uq": "uniform"

@@ -16,8 +16,8 @@ DIST_DICT = {
 TARGET_COLS = {
     "dollars_per_hour",
     "hours_per_shift",
-    "mins_per_plant",
-    "num_plants",
+    "mins_per_doc",
+    "num_docs",
 }
 
 
@@ -33,10 +33,10 @@ def filter_and_process_samples(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def payroll_analysis(
-    num_plants=100, mins_per_plant=5, dollars_per_hour=15, hours_per_shift=8, **kwds
+    num_docs=100, mins_per_doc=5, dollars_per_hour=15, hours_per_shift=8, **kwds
 ):
-    hours_per_plant_per_day = mins_per_plant / 60.0
-    total_hours_per_day = hours_per_plant_per_day * num_plants
+    hours_per_doc_per_day = mins_per_doc / 60.0
+    total_hours_per_day = hours_per_doc_per_day * num_docs
     daily_employee_cost = dollars_per_hour * total_hours_per_day
     shifts_per_day = total_hours_per_day / hours_per_shift
     return daily_employee_cost, shifts_per_day
@@ -82,7 +82,7 @@ def parse_input(
     if "dollars_per_hour" in output_df.columns:
         output_df["dollars_per_hour"] = output_df["dollars_per_hour"].round(2)
 
-    integer_types = ["num_plants", "hours_per_shift"]
+    integer_types = ["num_docs", "hours_per_shift"]
     for col in set(integer_types) & set(output_df.columns):
         output_df[col] = output_df[col].astype("int")
 
