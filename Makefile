@@ -1,4 +1,6 @@
-all: serve
+local:
+	cd model/ && \
+	gunicorn -k gevent -w 1 -b :1337 wsgi:app
 
 build:
 	docker build -t flask-api .
