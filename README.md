@@ -32,3 +32,9 @@ pip install -r requirements.txt
 cd model
 flask run --host 0.0.0.0 --port 1337
 ```
+
+If you don't have `docker`, or permissions to run `nginx`, you can instead run:
+```bash
+cd model/
+gunicorn -k gevent -w 1 -b :1337 wsgi:app
+```
