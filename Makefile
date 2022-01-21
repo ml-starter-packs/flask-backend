@@ -34,3 +34,4 @@ clean:
 .PHONY: test.csv blank.csv
 test: test.csv
 blank: blank.csv
+tests: test blank
