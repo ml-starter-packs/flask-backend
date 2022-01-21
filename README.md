@@ -21,8 +21,7 @@ make serve
 
 Then to test the API in a separate shell (or `Ctrl-Z`, `bg` and use the same shell):
 ```bash
-make test
-make blank
+make tests
 ```
 
 Extra fun: upload the resulting `test.csv` to [hiplot](https://facebookresearch.github.io/hiplot/_static/hiplot_upload.html) to visualize the result of the calculation that was just performed.
