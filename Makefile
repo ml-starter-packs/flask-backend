@@ -4,7 +4,7 @@ build:
 	docker build -t test-api .
 
 serve: build
-	docker run -p 1337:1337 --rm -v $(shell pwd)/model/predictor.py:/opt/program/predictor.py test-api
+	docker run -ti -p 1337:1337 --rm -v $(shell pwd)/model/predictor.py:/opt/program/predictor.py test-api
 
 test.csv:
 	@echo "======================="
