@@ -17,7 +17,7 @@ TARGET_COLS = {
     "dollars_per_hour",
     "hours_per_shift",
     "mins_per_doc",
-    "num_docs",
+    "num_docs_per_day",
 }
 
 
@@ -28,15 +28,16 @@ def filter_and_process_samples(df: pd.DataFrame) -> pd.DataFrame:
     df = df.round(2)
     # print(f"\n\tOutput data (head):\n{df.head()}\n")
     print(f"Info:\n{df.describe().T[['min', 'max', 'mean', '50%', 'count']]}")
-    output_columns = ["employee_cost_per_day", "num_shifts_per_day"]
+    # output_columns = ["employee_cost_per_day", "num_shifts_per_day"]
+    output_columns = df.columns
     return df[output_columns]
 
 
 def payroll_analysis(
-    num_docs=100, mins_per_doc=5, dollars_per_hour=15, hours_per_shift=8, **kwds
+    num_docs_per_day=100, mins_per_doc=5, dollars_per_hour=15, hours_per_shift=8, **kwds
 ):
     hours_per_doc_per_day = mins_per_doc / 60.0
-    total_hours_per_day = hours_per_doc_per_day * num_docs
+    total_hours_per_day = hours_per_doc_per_day * num_docs_per_day
     daily_employee_cost = dollars_per_hour * total_hours_per_day
     shifts_per_day = total_hours_per_day / hours_per_shift
     return daily_employee_cost, shifts_per_day
@@ -82,7 +83,7 @@ def parse_input(
     if "dollars_per_hour" in output_df.columns:
         output_df["dollars_per_hour"] = output_df["dollars_per_hour"].round(2)
 
-    integer_types = ["num_docs", "hours_per_shift"]
+    integer_types = ["num_docs_per_day", "hours_per_shift"]
     for col in set(integer_types) & set(output_df.columns):
         output_df[col] = output_df[col].astype("int")
 
