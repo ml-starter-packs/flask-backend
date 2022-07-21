@@ -1,40 +1,39 @@
 {
-    "config":
+  "config": {
+    "num_samples": 100
+  },
+  "params": [
     {
-        "num_samples": 100
-    },
-    "params": [
-    {
-        "$id": 1,
-        "id": 1,
-        "name": "num_docs_per_day",
-        "min": 500,
-        "max": 5000,
-        "uq": "uniform"
-    },
-    {
-        "$id": 2,
-        "id": 2,
-        "name": "mins_per_doc",
-        "min": 2,
-        "max": 5,
-        "uq": "uniform"
+      "$id": 1,
+      "id": 1,
+      "name": "num_docs_per_day",
+      "min": 500,
+      "max": 5000,
+      "uq": "uniform"
     },
     {
-        "$id": 3,
-        "id": 3,
-        "name": "hours_per_shift",
-        "min": 7,
-        "max": 12,
-        "uq": "uniform"
+      "$id": 2,
+      "id": 2,
+      "name": "mins_per_doc",
+      "min": 2,
+      "max": 5,
+      "uq": "uniform"
     },
     {
-        "$id": 4,
-        "id": 4,
-        "name": "dollars_per_hour",
-        "min": 10,
-        "max": 25,
-        "uq": "uniform"
+      "$id": 3,
+      "id": 3,
+      "name": "hours_per_shift",
+      "min": 7,
+      "max": 12,
+      "uq": "uniform"
+    },
+    {
+      "$id": 4,
+      "id": 4,
+      "name": "dollars_per_hour",
+      "min": 10,
+      "max": 25,
+      "uq": "uniform"
     }
-]
+  ]
 }

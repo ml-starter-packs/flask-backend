@@ -5,7 +5,6 @@ import io
 from typing import Dict, Tuple
 
 import flask
-
 from predictor import inference
 
 app = flask.Flask(__name__)

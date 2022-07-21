@@ -1,12 +1,12 @@
 {
-    "config":
-    {},
-    "params": [
+  "config": {},
+  "params": [
     {
-        "$id": 1,
-        "id": 1,
-        "name": "mins_per_doc",
-        "min": 2,
-        "max": 5
-    }]
+      "$id": 1,
+      "id": 1,
+      "name": "mins_per_doc",
+      "min": 2,
+      "max": 5
+    }
+  ]
 }
